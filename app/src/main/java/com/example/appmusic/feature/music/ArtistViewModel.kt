@@ -34,6 +34,7 @@ class ArtistViewModel @Inject constructor(
         when (event) {
             is AddArtist -> viewModelScope.launch {
                 artistRepository.addArtist(_addingArtist.value)
+                _addingArtist.value = Artist()
             }
 
             is InputAge -> _addingArtist.update { it.copy(age = event.value.toInt()) }

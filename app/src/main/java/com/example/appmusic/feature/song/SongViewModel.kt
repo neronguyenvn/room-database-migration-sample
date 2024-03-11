@@ -40,6 +40,12 @@ class SongViewModel @Inject constructor(
         when (event) {
             SongEvent.AddSong -> viewModelScope.launch {
                 songRepository.addSong(_addingSong.value)
+                _addingSong.update {
+                    it.copy(
+                        name = "",
+                        image = ""
+                    )
+                }
             }
 
             is SongEvent.InputImage -> _addingSong.update { it.copy(image = event.value) }

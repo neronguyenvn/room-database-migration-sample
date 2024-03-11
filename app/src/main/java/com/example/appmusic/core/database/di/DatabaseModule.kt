@@ -2,6 +2,7 @@ package com.example.appmusic.core.database.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.appmusic.core.database.migration.MIGRATION_1_2
 import com.example.appmusic.core.database.room.RoomAmDatabase
 import dagger.Module
 import dagger.Provides
@@ -22,7 +23,9 @@ object DatabaseModule {
         context,
         RoomAmDatabase::class.java,
         "am-database"
-    ).build()
+    )
+        .addMigrations(MIGRATION_1_2)
+        .build()
 
     @Provides
     fun providesArtistDao(

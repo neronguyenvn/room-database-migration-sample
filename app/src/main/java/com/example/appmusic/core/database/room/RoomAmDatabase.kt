@@ -12,7 +12,7 @@ import com.example.appmusic.core.database.model.Song
         Artist::class,
         Song::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = true
 )
 abstract class RoomAmDatabase : RoomDatabase() {

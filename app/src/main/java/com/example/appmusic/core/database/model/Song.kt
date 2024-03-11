@@ -13,7 +13,7 @@ import androidx.room.PrimaryKey
         childColumns = arrayOf("artistId"),
         onDelete = ForeignKey.CASCADE
     )],
-    indices = [Index("artistId", unique = true)]
+    indices = [Index("artistId")]
 )
 data class Song(
     val name: String,
