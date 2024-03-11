@@ -19,6 +19,7 @@ data class Song(
     val name: String,
     val image: String,
     val artistId: Int,
+    val isFavorite: Boolean,
 
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0

@@ -15,8 +15,10 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.appmusic.feature.music.ArtistScreen
 import com.example.appmusic.feature.music.ArtistViewModel
+import com.example.appmusic.feature.song.FavoriteSongScreen
+import com.example.appmusic.feature.song.FavoriteSongViewModel
+import com.example.appmusic.feature.song.SongByArtistViewModel
 import com.example.appmusic.feature.song.SongScreen
-import com.example.appmusic.feature.song.SongViewModel
 
 @Composable
 fun AmApp() {
@@ -31,17 +33,24 @@ fun AmApp() {
             composable("artistRoute") {
                 val viewModel: ArtistViewModel = hiltViewModel()
                 val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-                ArtistScreen(uiState = uiState,
-                    navToSong = { id -> navController.navigate("songRoute/$id") })
+                ArtistScreen(
+                    uiState = uiState,
+                    navToSong = { id -> navController.navigate("songRoute/$id") },
+                    navToFavorite = { navController.navigate("favoriteRoute") })
             }
             composable("songRoute/{artistId}",
                 arguments = listOf(
                     navArgument("artistId") { type = NavType.IntType }
                 )
             ) {
-                val viewModel: SongViewModel = hiltViewModel()
+                val viewModel: SongByArtistViewModel = hiltViewModel()
                 val uiState by viewModel.uiState.collectAsStateWithLifecycle()
                 SongScreen(uiState = uiState)
+            }
+            composable("favoriteRoute") {
+                val viewModel: FavoriteSongViewModel = hiltViewModel()
+                val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+                FavoriteSongScreen(uiState = uiState)
             }
         }
     }

@@ -3,16 +3,20 @@ package com.example.appmusic.core.database
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
-import com.example.appmusic.core.database.model.ArtistWithSongs
 import com.example.appmusic.core.database.model.Song
+import com.example.appmusic.core.database.model.SongWithArtist
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface SongDao {
 
-    @Query("SELECT * FROM artist WHERE id = :artistId")
-    fun observeByArtistId(artistId: Int): Flow<ArtistWithSongs?>
+
+    @Query("SELECT * FROM song WHERE isFavorite = 1")
+    fun observeByFavorite(): Flow<List<SongWithArtist>>
 
     @Upsert
     fun upsert(song: Song)
+
+    @Query("UPDATE song SET isFavorite = NOT isFavorite WHERE id = :id")
+    fun toggleIsFavoriteById(id: Int)
 }

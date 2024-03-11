@@ -24,6 +24,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -55,7 +56,8 @@ sealed interface ArtistEvent {
 @Composable
 fun ArtistScreen(
     uiState: ArtistUiState,
-    navToSong: (Int) -> Unit
+    navToSong: (Int) -> Unit,
+    navToFavorite: () -> Unit
 ) {
     var showAddDialog by remember { mutableStateOf(false) }
 
@@ -74,10 +76,16 @@ fun ArtistScreen(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             item {
-                Text(
-                    text = ("Artist List"),
-                    style = MaterialTheme.typography.titleLarge
-                )
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        text = ("Artist List"),
+                        style = MaterialTheme.typography.titleLarge
+                    )
+                    Spacer(modifier = Modifier.weight(1f))
+                    TextButton(onClick = { navToFavorite() }) {
+                        Text(text = "View favorite songs")
+                    }
+                }
             }
             items(uiState.artists) { artist ->
                 ArtistItem(artist) {

@@ -3,6 +3,7 @@ package com.example.appmusic.core.database.di
 import android.content.Context
 import androidx.room.Room
 import com.example.appmusic.core.database.migration.MIGRATION_1_2
+import com.example.appmusic.core.database.migration.MIGRATION_2_3
 import com.example.appmusic.core.database.room.RoomAmDatabase
 import dagger.Module
 import dagger.Provides
@@ -24,7 +25,7 @@ object DatabaseModule {
         RoomAmDatabase::class.java,
         "am-database"
     )
-        .addMigrations(MIGRATION_1_2)
+        .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
         .build()
 
     @Provides
