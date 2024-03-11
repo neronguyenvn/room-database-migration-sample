@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.appmusic.core.data.ArtistRepository
 import com.example.appmusic.core.database.model.Artist
 import com.example.appmusic.feature.music.ArtistEvent.AddArtist
-import com.example.appmusic.feature.music.ArtistEvent.InputAge
 import com.example.appmusic.feature.music.ArtistEvent.InputImage
 import com.example.appmusic.feature.music.ArtistEvent.InputName
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -36,8 +35,6 @@ class ArtistViewModel @Inject constructor(
                 artistRepository.addArtist(_addingArtist.value)
                 _addingArtist.value = Artist()
             }
-
-            is InputAge -> _addingArtist.update { it.copy(age = event.value.toInt()) }
 
             is InputImage -> _addingArtist.update { it.copy(image = event.value) }
 

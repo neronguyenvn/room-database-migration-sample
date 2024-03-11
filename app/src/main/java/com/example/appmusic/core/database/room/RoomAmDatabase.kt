@@ -5,15 +5,17 @@ import androidx.room.RoomDatabase
 import com.example.appmusic.core.database.ArtistDao
 import com.example.appmusic.core.database.SongDao
 import com.example.appmusic.core.database.model.Artist
+import com.example.appmusic.core.database.model.Genre
 import com.example.appmusic.core.database.model.Song
 
 @Database(
     entities = [
         Artist::class,
-        Song::class
+        Song::class,
+        Genre::class
     ],
-    version = 3,
-    exportSchema = true
+    version = 5,
+    exportSchema = true,
 )
 abstract class RoomAmDatabase : RoomDatabase() {
 

@@ -2,6 +2,7 @@ package com.example.appmusic.core.database
 
 import androidx.room.Dao
 import androidx.room.Query
+import androidx.room.Transaction
 import androidx.room.Upsert
 import com.example.appmusic.core.database.model.Song
 import com.example.appmusic.core.database.model.SongWithArtist
@@ -11,6 +12,7 @@ import kotlinx.coroutines.flow.Flow
 interface SongDao {
 
 
+    @Transaction
     @Query("SELECT * FROM song WHERE isFavorite = 1")
     fun observeByFavorite(): Flow<List<SongWithArtist>>
 

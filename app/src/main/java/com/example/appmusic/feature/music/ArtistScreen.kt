@@ -14,7 +14,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -38,7 +37,6 @@ import com.example.appmusic.core.database.model.Artist
 import com.example.appmusic.core.designsystem.component.AddTextFieldRow
 import com.example.appmusic.core.designsystem.component.InfoRow
 import com.example.appmusic.feature.music.ArtistEvent.AddArtist
-import com.example.appmusic.feature.music.ArtistEvent.InputAge
 import com.example.appmusic.feature.music.ArtistEvent.InputImage
 import com.example.appmusic.feature.music.ArtistEvent.InputName
 
@@ -49,8 +47,6 @@ sealed interface ArtistEvent {
     data class InputName(val value: String) : ArtistEvent
 
     data class InputImage(val value: String) : ArtistEvent
-
-    data class InputAge(val value: String) : ArtistEvent
 }
 
 @Composable
@@ -118,13 +114,6 @@ fun ArtistScreen(
                     ) {
                         uiState.eventSink(InputImage(it))
                     }
-                    AddTextFieldRow(
-                        icon = Icons.Default.DateRange,
-                        label = "Age",
-                        value = uiState.addingArtist.age.let { if (it != 0) it.toString() else "" }
-                    ) {
-                        uiState.eventSink(InputAge(it))
-                    }
                     Row {
                         Spacer(modifier = Modifier.weight(1f))
                         OutlinedButton(onClick = { showAddDialog = false }) {
@@ -155,11 +144,6 @@ fun ArtistItem(artist: Artist, onClick: () -> Unit) {
         ) {
             Text(text = artist.name, style = MaterialTheme.typography.titleMedium)
             InfoRow(icon = Icons.Default.AccountBox, infoName = "Image", infoContent = artist.image)
-            InfoRow(
-                icon = Icons.Default.DateRange,
-                infoName = "Age",
-                infoContent = artist.age.toString()
-            )
         }
     }
 }
