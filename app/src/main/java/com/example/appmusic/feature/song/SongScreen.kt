@@ -12,9 +12,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Book
+import androidx.compose.material.icons.filled.BookOnline
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.FloatingActionButton
@@ -88,14 +88,14 @@ fun SongScreen(uiState: SongUiState) {
                 ) {
                     Text(text = "Add Song", style = MaterialTheme.typography.titleMedium)
                     AddTextFieldRow(
-                        icon = Icons.Default.Person,
+                        icon = Icons.Default.Book,
                         label = "Name",
                         value = uiState.addingSong?.name ?: ""
                     ) {
                         uiState.eventSink(SongEvent.InputName(it))
                     }
                     AddTextFieldRow(
-                        icon = Icons.Default.AccountBox,
+                        icon = Icons.Default.BookOnline,
                         label = "Image",
                         value = uiState.addingSong?.image ?: ""
                     ) {
@@ -130,7 +130,7 @@ fun SongItem(song: Song) {
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             Text(text = song.name, style = MaterialTheme.typography.titleMedium)
-            InfoRow(icon = Icons.Default.AccountBox, infoName = "Image", infoContent = song.image)
+            InfoRow(icon = Icons.Default.BookOnline, infoName = "Image", infoContent = song.image)
         }
     }
 }
